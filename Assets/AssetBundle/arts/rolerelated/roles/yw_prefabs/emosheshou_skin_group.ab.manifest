@@ -1,0 +1,35 @@
+ManifestFileVersion: 0
+CRC: 3478769728
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 64b8ae2f9d794e87bdd168d09f2c0287
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 8156af9ab79f33cc0580f603471ee2f8
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 90
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/MyTest/Resources/RoleRelated/Roles/YW_Prefabs/emosheshou_skin_Group.prefab
+Dependencies: []

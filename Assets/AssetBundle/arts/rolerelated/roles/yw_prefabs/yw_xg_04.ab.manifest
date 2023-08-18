@@ -1,0 +1,37 @@
+ManifestFileVersion: 0
+CRC: 247667186
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c018a80f4b471139631fe670be697677
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c102682b0b3d05d74c558163f43c7d6d
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 90
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/MyTest/Resources/RoleRelated/Roles/YW_Prefabs/YW_XG_04.prefab
+Dependencies: []

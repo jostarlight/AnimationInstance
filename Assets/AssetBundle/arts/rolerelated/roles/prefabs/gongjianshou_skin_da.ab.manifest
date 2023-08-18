@@ -1,0 +1,39 @@
+ManifestFileVersion: 0
+CRC: 1431606634
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 4abb35f280e4b01240517c4c628c2d7e
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 6b97c11cebd69579ed31877a683a7eac
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 90
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2f47bf4169ec5dd4cbf530cf6929eeab, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/MyTest/Resources/RoleRelated/Roles/Prefabs/gongjianshou_skin_da.prefab
+Dependencies: []

@@ -1,0 +1,45 @@
+ManifestFileVersion: 0
+CRC: 57878260
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: fa908237dfaa283f40039fa38c17af08
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/AnimationTexture/hero06_skin.bytes
+- Assets/AnimationTexture/Animal_04.bytes
+- Assets/AnimationTexture/hero04_skin.bytes
+- Assets/AnimationTexture/Animal_01.bytes
+- Assets/AnimationTexture/hero02_skin.bytes
+- Assets/AnimationTexture/emofashi_skin_da.bytes
+- Assets/AnimationTexture/hero12_skin.bytes
+- Assets/AnimationTexture/emosheshou_skin_da.bytes
+- Assets/AnimationTexture/Dude_low_instancing.bytes
+- Assets/AnimationTexture/hero10_skin.bytes
+- Assets/AnimationTexture/Animal_03.bytes
+- Assets/AnimationTexture/gongjianshou_skin_da.bytes
+- Assets/AnimationTexture/airensheshou_skin.bytes
+- Assets/AnimationTexture/hero07_skin.bytes
+- Assets/AnimationTexture/emosheshou_skin.bytes
+- Assets/AnimationTexture/hero14_skin.bytes
+- Assets/AnimationTexture/emozhanshi_skin.bytes
+- Assets/AnimationTexture/emofashi_skin.bytes
+- Assets/AnimationTexture/hero08_skin.bytes
+- Assets/AnimationTexture/hero05_skin.bytes
+- Assets/AnimationTexture/airenzhanshi_skin.bytes
+- Assets/AnimationTexture/Unity_Model_instancing.bytes
+- Assets/AnimationTexture/hero11_skin.bytes
+- Assets/AnimationTexture/airensheshou_skin_da.bytes
+- Assets/AnimationTexture/airenzhanshi_skin_da.bytes
+- Assets/AnimationTexture/hero01_skin.bytes
+- Assets/AnimationTexture/hero10_xiao_skin.bytes
+- Assets/AnimationTexture/srxb_zs_skin_da.bytes
+- Assets/AnimationTexture/emozhanshi_skin_da.bytes
+Dependencies: []
