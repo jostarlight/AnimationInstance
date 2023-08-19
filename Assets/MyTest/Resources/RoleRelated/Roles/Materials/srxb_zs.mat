@@ -62,5 +62,5 @@ Material:
     - _ColorMul: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
-    - _color: {r: 1, g: 1, b: 1, a: 1}
+    - _color: {r: 1, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: airenzhanshi
-  m_Shader: {fileID: 4800000, guid: 51b760e40033cd04fa1011656f1e9f8e, type: 3}
+  m_Shader: {fileID: 4800000, guid: 7011ed8aa9d29a0438e2b285926a38c8, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -66,5 +66,5 @@ Material:
     - _ColorMul: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
-    - _color: {r: 1, g: 1, b: 1, a: 1}
+    - _color: {r: 1, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

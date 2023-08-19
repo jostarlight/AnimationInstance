@@ -4,7 +4,7 @@
 // - no Main Color
 // - fully supports only 1 directional light. Other lights can affect it, but it will be per-vertex/SH.
 
-Shader "changeColor3" {
+Shader "changeColor" {
     Properties {
         _Diffuse ("Diffuse", 2D) = "white" {}
         _ChageColorMask ("Chage Color Mask", 2D) = "white" {}
@@ -28,7 +28,6 @@ Shader "changeColor3" {
 
             #include "Lighting.cginc"
             #include "UnityCG.cginc"
-            #include "AnimationInstancingBase.cginc"
             struct appdata_t {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -67,7 +66,6 @@ Shader "changeColor3" {
             v2f vertt (appdata_full v)
             {
                 v2f o;
-                vert(v);
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.texcoord =v.texcoord;// TRANSFORM_TEX(v.texcoord, _Diffuse);
                 o.normalDir = UnityObjectToWorldNormal(v.normal);
