@@ -21,13 +21,13 @@ namespace AnimationInstancing
         public Transform worldTransform;
         //public GameObject prefab { get; set; }
         public GameObject prototype;
-        public BoundingSphere boundingSpere;
+        //public BoundingSphere boundingSpere;
         public bool visible { get; set; }
         public AnimationInstancing parentInstance { get; set; }
         public float playSpeed = 1.0f;
         public UnityEngine.Rendering.ShadowCastingMode shadowCastingMode;
         public bool receiveShadow;
-        [NonSerialized]
+        //[NonSerialized]
         public int layer;
         float speedParameter = 1.0f, cacheParameter = 1.0f;
         WrapMode wrapMode;
@@ -64,6 +64,8 @@ namespace AnimationInstancing
         private ComparerHash comparer;
         private AnimationInfo searchInfo;
         private AnimationEvent aniEvent = null;
+        private bool isInit = false;
+        public string defaultAnimation = string.Empty;
         public class LodInfo
         {
             public int lodLevel;
@@ -94,7 +96,7 @@ namespace AnimationInstancing
 
             worldTransform = GetComponent<Transform>();
             animator = GetComponent<Animator>();
-            boundingSpere = new BoundingSphere(new Vector3(0, 0, 0), 1.0f);
+            //boundingSpere = new BoundingSphere(new Vector3(0, 0, 0), 1.0f);
             listAttachment = new List<AnimationInstancing>();
             layer = gameObject.layer;
 
@@ -174,9 +176,10 @@ namespace AnimationInstancing
                 animator.enabled = false;
             }
             visible = true;
-            CalcBoundingSphere();
-            AnimationInstancingMgr.Instance.AddBoundingSphere(this);
+            //CalcBoundingSphere();
+            //AnimationInstancingMgr.Instance.AddBoundingSphere(this);
             AnimationInstancingMgr.Instance.AddInstance(gameObject);
+            isInit = true;
         }
 
 
@@ -299,10 +302,16 @@ namespace AnimationInstancing
 
             Destroy(GetComponent<Animator>());
             //Destroy(GetComponentInChildren<SkinnedMeshRenderer>());
-
-            PlayAnimation(0);
+            if (string.IsNullOrEmpty(defaultAnimation))
+            {
+                PlayAnimation(0);
+            }
+            else
+            {
+                PlayAnimation(defaultAnimation);
+            }
         }
-
+/*
         private void CalcBoundingSphere()
         {
             UnityEngine.Profiling.Profiler.BeginSample("CalcBoundingSphere()");
@@ -323,10 +332,25 @@ namespace AnimationInstancing
             boundingSpere.radius = radius;
             UnityEngine.Profiling.Profiler.EndSample();
         }
-
+*/
 
         public void PlayAnimation(string name)
         {
+            // int hash = name.GetHashCode();
+            // int index = FindAnimationInfo(hash);
+            // PlayAnimation(index);
+            if (gameObject.activeInHierarchy)
+            {
+                StartCoroutine(PlayAnimationAsync(name));
+            }
+        }
+
+        private IEnumerator PlayAnimationAsync(string name)
+        {
+            while (!isInit)
+            {
+                yield return null;
+            }
             int hash = name.GetHashCode();
             int index = FindAnimationInfo(hash);
             PlayAnimation(index);

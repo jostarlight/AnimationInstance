@@ -16,13 +16,13 @@ namespace AnimationInstancing
     public class AnimationManager : Singleton<AnimationManager>
     {
         // A request to create animation info, because we use async method
-        struct CreateAnimationRequest 
+        struct CreateAnimationRequest
         {
             public GameObject prefab;
             public AnimationInstancing instance;
         }
         // A container to storage all animations info within game object
-        public class InstanceAnimationInfo 
+        public class InstanceAnimationInfo
         {
             public List<AnimationInfo> listAniInfo;
             public ExtraBoneInfo extraBoneInfo;
@@ -68,8 +68,8 @@ namespace AnimationInstancing
 
 #if UNITY_IPHONE || UNITY_ANDROID
             Debug.Assert(m_useBundle);
-			if (m_mainBundle == null)
-            	Debug.LogError("You should call LoadAnimationAssetBundle first.");
+            if (m_mainBundle == null)
+                Debug.LogError("You should call LoadAnimationAssetBundle first.");
 #endif
             if (m_useBundle)
             {
@@ -96,7 +96,7 @@ namespace AnimationInstancing
             AssetBundleCreateRequest request = AssetBundle.LoadFromFileAsync(path);
             yield return request;
 
-			if (request.assetBundle != null)
+            if (request.assetBundle != null)
             {
                 Debug.LogFormat("Load the AB {0} successed.", path);
                 m_mainBundle = request.assetBundle;
@@ -125,7 +125,7 @@ namespace AnimationInstancing
                 request.instance.Prepare(info.listAniInfo, info.extraBoneInfo);
             }
 
-			if (abRequest != null && !find)
+            if (abRequest != null && !find)
             {
                 TextAsset asset = abRequest.asset as TextAsset;
                 BinaryReader reader = new BinaryReader(new MemoryStream(asset.bytes));
@@ -149,6 +149,14 @@ namespace AnimationInstancing
 #endif
 
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
+            var text = Resources.Load<TextAsset>("AnimationTexture/" + prefab.name);
+            BinaryReader reader = new BinaryReader(new MemoryStream(text.bytes));
+            InstanceAnimationInfo info = new InstanceAnimationInfo();
+            info.listAniInfo = ReadAnimationInfo(reader);
+            info.extraBoneInfo = ReadExtraBoneInfo(reader);
+            m_animationInfo.Add(prefab, info);
+            AnimationInstancingMgr.Instance.ImportAnimationTexture(prefab.name, reader);
+            /*
             //Debug.Log("This is the data path:" + path);
             FileStream file = File.Open(path + prefab.name + ".bytes", FileMode.Open);
             Debug.Assert(file.CanRead);
@@ -159,6 +167,7 @@ namespace AnimationInstancing
             m_animationInfo.Add(prefab, info);
             AnimationInstancingMgr.Instance.ImportAnimationTexture(prefab.name, reader);
             file.Close();
+            */
 #elif UNITY_IPHONE
 		    path = "file://" + Application.dataPath +"/Raw/AnimationTexture/";
 		    WWW w = new WWW(path + prefab.name + ".bytes");
@@ -174,14 +183,15 @@ namespace AnimationInstancing
             m_animationInfo.Add(prefab, info);
             AnimationInstancingMgr.Instance.ImportAnimationTexture(prefab.name, reader);
 #elif UNITY_ANDROID
-            path = "jar:file://" + Application.dataPath + "!/assets/";
-            WWW w = new WWW(path + "AnimationTexture/" + prefab.name + ".bytes");
-            //wwwLoad(path + "/boneTexture/" + thisPrefab.name + ".aniData", SetupAniInfo);
-            while (!w.isDone) { }
+            // path = "jar:file://" + Application.dataPath + "!/assets/";
+            // WWW w = new WWW(path + "AnimationTexture/" + prefab.name + ".bytes");
+            // //wwwLoad(path + "/boneTexture/" + thisPrefab.name + ".aniData", SetupAniInfo);
+            // while (!w.isDone) { }
 //             BinaryReader reader = new BinaryReader(new MemoryStream(w.bytes));
 //             List<AnimationInfo> listInfo = ReadAnimationInfo(reader);
 //             m_animationInfo.Add(prefab, listInfo);
-            BinaryReader reader = new BinaryReader(new MemoryStream(w.bytes));	
+            var text = Resources.Load<TextAsset>("AnimationTexture/" + prefab.name);
+            BinaryReader reader = new BinaryReader(new MemoryStream(text.bytes));	
             InstanceAnimationInfo info = new InstanceAnimationInfo();
             info.listAniInfo = ReadAnimationInfo(reader);
             info.extraBoneInfo = ReadExtraBoneInfo(reader);
@@ -194,7 +204,7 @@ namespace AnimationInstancing
         private List<AnimationInfo> ReadAnimationInfo(BinaryReader reader)
         {
             int count = reader.ReadInt32();
-            List<AnimationInfo>  listInfo = new List<AnimationInfo>();
+            List<AnimationInfo> listInfo = new List<AnimationInfo>();
             for (int i = 0; i != count; ++i)
             {
                 AnimationInfo info = new AnimationInfo();

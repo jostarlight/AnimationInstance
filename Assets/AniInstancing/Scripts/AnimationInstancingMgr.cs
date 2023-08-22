@@ -72,7 +72,7 @@ namespace AnimationInstancing
         // all object used animation instancing
         List<AnimationInstancing> aniInstancingList;
         // to calculate lod level
-        private Transform cameraTransform; 
+        private Transform cameraTransform;
         private Dictionary<int, VertexCache> vertexCachePool;
         private Dictionary<int, InstanceData> instanceDataPool;
         const int InstancingSizePerPackage = 200;
@@ -92,9 +92,9 @@ namespace AnimationInstancing
             set { useInstancing = value; }
         }
 
-        BoundingSphere[] boundingSphere;
-        int usedBoundingSphereCount = 0;
-        CullingGroup cullingGroup;
+        //BoundingSphere[] boundingSphere;
+        //int usedBoundingSphereCount = 0;
+        //CullingGroup cullingGroup;
 
         public static AnimationInstancingMgr GetInstance()
         {
@@ -103,8 +103,8 @@ namespace AnimationInstancing
 
         private void OnEnable()
         {
-            boundingSphere = new BoundingSphere[5000];
-            InitializeCullingGroup();
+            //boundingSphere = new BoundingSphere[5000];
+            //InitializeCullingGroup();
             cameraTransform = Camera.main.transform;
             aniInstancingList = new List<AnimationInstancing>(1000);
             if (SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.OpenGLES2)
@@ -113,15 +113,15 @@ namespace AnimationInstancing
                 UseInstancing = false;
             }
 
-			vertexCachePool = new Dictionary<int, VertexCache>();
-			instanceDataPool = new Dictionary<int, InstanceData>();
+            vertexCachePool = new Dictionary<int, VertexCache>();
+            instanceDataPool = new Dictionary<int, InstanceData>();
         }
 
         private void Start()
         {
-            
-        }
 
+        }
+        /*
         private void InitializeCullingGroup()
         {
             cullingGroup = new CullingGroup();
@@ -131,6 +131,7 @@ namespace AnimationInstancing
             usedBoundingSphereCount = 0;
             cullingGroup.SetBoundingSphereCount(usedBoundingSphereCount);
         }
+        */
 
         void Update()
         {
@@ -155,7 +156,7 @@ namespace AnimationInstancing
                                 continue;
                             for (int j = 0; j != package.subMeshCount; ++j)
                             {
-                                InstanceData data = block.Value.instanceData; 
+                                InstanceData data = block.Value.instanceData;
                                 if (useInstancing)
                                 {
 #if UNITY_EDITOR
@@ -193,34 +194,34 @@ namespace AnimationInstancing
                     }
                 }
 
-//                 if (obj.Value.instancingData == null)
-//                     continue;
-//                 vertexCache.bufInstance.SetData(obj.Value.instancingData);
-// 
-//                 for (int i = 0; i != vertexCache.subMeshCount; ++i)
-//                 {
-//                     Material material = vertexCache.instanceMaterial[i];
-//                     material.SetBuffer("buf_InstanceMatrices", vertexCache.bufInstance);
-//                     vertexCache.args[i][1] = (uint)vertexCache.currentInstancingIndex;
-//                     vertexCache.bufArgs[i].SetData(vertexCache.args[i]);
-// 
-//                     Graphics.DrawMeshInstancedIndirect(vertexCache.mesh,
-//                                     i,
-//                                     vertexCache.instanceMaterial[i],
-//                                     new Bounds(Vector3.zero, new Vector3(10000.0f, 10000.0f, 10000.0f)),
-//                                     vertexCache.bufArgs[i]);
-//                 }
-//                 vertexCache.currentInstancingIndex = 0;
+                //                 if (obj.Value.instancingData == null)
+                //                     continue;
+                //                 vertexCache.bufInstance.SetData(obj.Value.instancingData);
+                // 
+                //                 for (int i = 0; i != vertexCache.subMeshCount; ++i)
+                //                 {
+                //                     Material material = vertexCache.instanceMaterial[i];
+                //                     material.SetBuffer("buf_InstanceMatrices", vertexCache.bufInstance);
+                //                     vertexCache.args[i][1] = (uint)vertexCache.currentInstancingIndex;
+                //                     vertexCache.bufArgs[i].SetData(vertexCache.args[i]);
+                // 
+                //                     Graphics.DrawMeshInstancedIndirect(vertexCache.mesh,
+                //                                     i,
+                //                                     vertexCache.instanceMaterial[i],
+                //                                     new Bounds(Vector3.zero, new Vector3(10000.0f, 10000.0f, 10000.0f)),
+                //                                     vertexCache.bufArgs[i]);
+                //                 }
+                //                 vertexCache.currentInstancingIndex = 0;
             }
         }
 
         public void Clear()
         {
             aniInstancingList.Clear();
-            cullingGroup.Dispose();
+            //cullingGroup.Dispose();
             vertexCachePool.Clear();
             instanceDataPool.Clear();
-            InitializeCullingGroup();
+            //InitializeCullingGroup();
         }
 
         public GameObject CreateInstance(GameObject prefab)
@@ -262,23 +263,23 @@ namespace AnimationInstancing
         {
             Debug.Assert(aniInstancingList != null);
             bool removed = aniInstancingList.Remove(instance);
-            if (removed)
-            {
-                --usedBoundingSphereCount;
-                cullingGroup.SetBoundingSphereCount(usedBoundingSphereCount);
-                Debug.Assert(usedBoundingSphereCount >= 0);
-                if (usedBoundingSphereCount < 0)
-                {
-                    Debug.DebugBreak();
-                }
-            }
+            // if (removed)
+            // {
+            //     --usedBoundingSphereCount;
+            //     cullingGroup.SetBoundingSphereCount(usedBoundingSphereCount);
+            //     Debug.Assert(usedBoundingSphereCount >= 0);
+            //     if (usedBoundingSphereCount < 0)
+            //     {
+            //         Debug.DebugBreak();
+            //     }
+            // }
         }
 
         void OnDisable()
         {
             ReleaseBuffer();
-            cullingGroup.Dispose();
-            cullingGroup = null;
+            // cullingGroup.Dispose();
+            // cullingGroup = null;
         }
 
 #if !UNITY_ANDROID && !UNITY_IPHONE
@@ -310,10 +311,10 @@ namespace AnimationInstancing
                         }
                     }
                 }
-                
+
             }
         }
-       
+
         void ApplyBoneMatrix()
         {
             Vector3 cameraPosition = cameraTransform.position;
@@ -329,8 +330,8 @@ namespace AnimationInstancing
                     ApplyRootMotion(instance);
 
                 instance.UpdateAnimation();
-                instance.boundingSpere.position = instance.transform.position;
-                boundingSphere[i] = instance.boundingSpere;
+                //instance.boundingSpere.position = instance.transform.position;
+                //boundingSphere[i] = instance.boundingSpere;
 
                 if (!instance.visible)
                     continue;
@@ -603,8 +604,8 @@ namespace AnimationInstancing
                 data.frameIndex[i] = new List<float[]>();
                 data.preFrameIndex[i] = new List<float[]>();
                 data.transitionProgress[i] = new List<float[]>();
-            }   
-            return data;    
+            }
+            return data;
         }
 
 
@@ -662,7 +663,7 @@ namespace AnimationInstancing
                     int identify = GetIdentify(lod.meshRenderer[i].sharedMaterials);
                     VertexCache cache = null;
                     if (vertexCachePool.TryGetValue(renderName + aliasName, out cache))
-                    { 
+                    {
                         MaterialBlock block = null;
                         if (!cache.instanceBlockList.TryGetValue(identify, out block))
                         {
@@ -703,16 +704,16 @@ namespace AnimationInstancing
         {
             MaterialBlock block = new MaterialBlock();
             int packageCount = GetPackageCount(cache);
-            block.instanceData = CreateInstanceData(packageCount);                             
+            block.instanceData = CreateInstanceData(packageCount);
             block.packageList = new List<InstancingPackage>[packageCount];
             for (int i = 0; i != block.packageList.Length; ++i)
             {
-               block.packageList[i] = new List<InstancingPackage>();
+                block.packageList[i] = new List<InstancingPackage>();
 
-               InstancingPackage package = CreatePackage(block.instanceData, 
-                    cache.mesh,
-                    materials, 
-                    i);
+                InstancingPackage package = CreatePackage(block.instanceData,
+                     cache.mesh,
+                     materials,
+                     i);
                 block.packageList[i].Add(package);
                 PreparePackageMaterial(package, cache, i);
                 package.instancingCount = 1;
@@ -886,7 +887,7 @@ namespace AnimationInstancing
 
         public void SetupAdditionalData(VertexCache vertexCache)
         {
-            Color[] colors = new Color[vertexCache.weight.Length];            
+            Color[] colors = new Color[vertexCache.weight.Length];
             for (int i = 0; i != colors.Length; ++i)
             {
                 colors[i].r = vertexCache.weight[i].x;
@@ -909,7 +910,7 @@ namespace AnimationInstancing
         {
             if (vertexCache.boneTextureIndex < 0)
                 return;
-                
+
             for (int i = 0; i != package.subMeshCount; ++i)
             {
                 AnimationTexture texture = animationTextureList[vertexCache.boneTextureIndex];
@@ -921,33 +922,33 @@ namespace AnimationInstancing
             }
         }
 
-
-        public void AddBoundingSphere(AnimationInstancing instance)
-        {
-            boundingSphere[usedBoundingSphereCount++] = instance.boundingSpere;
-            cullingGroup.SetBoundingSphereCount(usedBoundingSphereCount);
-            instance.visible = cullingGroup.IsVisible(usedBoundingSphereCount - 1);
-        }
-
-
-        private void CullingStateChanged(CullingGroupEvent evt)
-        {
-            Debug.Assert(evt.index < usedBoundingSphereCount);
-            if (evt.hasBecomeVisible)
-            {
-                Debug.Assert(evt.index < aniInstancingList.Count);
-                if (aniInstancingList[evt.index].isActiveAndEnabled)
+        /*
+                public void AddBoundingSphere(AnimationInstancing instance)
                 {
-                    aniInstancingList[evt.index].visible = true;
+                    boundingSphere[usedBoundingSphereCount++] = instance.boundingSpere;
+                    cullingGroup.SetBoundingSphereCount(usedBoundingSphereCount);
+                    instance.visible = cullingGroup.IsVisible(usedBoundingSphereCount - 1);
                 }
-            }
-            if (evt.hasBecomeInvisible)
-            {
-                Debug.Assert(evt.index < aniInstancingList.Count);
-                aniInstancingList[evt.index].visible = false;
-            }
-        }
-
+        */
+        /*
+                private void CullingStateChanged(CullingGroupEvent evt)
+                {
+                    Debug.Assert(evt.index < usedBoundingSphereCount);
+                    if (evt.hasBecomeVisible)
+                    {
+                        Debug.Assert(evt.index < aniInstancingList.Count);
+                        if (aniInstancingList[evt.index].isActiveAndEnabled)
+                        {
+                            aniInstancingList[evt.index].visible = true;
+                        }
+                    }
+                    if (evt.hasBecomeInvisible)
+                    {
+                        Debug.Assert(evt.index < aniInstancingList.Count);
+                        aniInstancingList[evt.index].visible = false;
+                    }
+                }
+        */
 
         public void BindAttachment(VertexCache parentCache, VertexCache attachmentCache, Mesh sharedMesh, int boneIndex)
         {
