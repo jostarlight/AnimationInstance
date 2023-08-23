@@ -617,7 +617,7 @@ namespace AnimationInstancing
             int bonePerVertex,
             string alias = null)
         {
-            UnityEngine.Profiling.Profiler.BeginSample("AddMeshVertex()");
+            //UnityEngine.Profiling.Profiler.BeginSample("AddMeshVertex()");
             for (int x = 0; x != lodInfo.Length; ++x)
             {
                 AnimationInstancing.LodInfo lod = lodInfo[x];
@@ -686,7 +686,7 @@ namespace AnimationInstancing
                 }
             }
 
-            UnityEngine.Profiling.Profiler.EndSample();
+            //UnityEngine.Profiling.Profiler.EndSample();
         }
 
         int GetPackageCount(VertexCache vertexCache)
@@ -790,7 +790,7 @@ namespace AnimationInstancing
                 }
             }
 
-            UnityEngine.Profiling.Profiler.BeginSample("Copy the vertex data in SetupVertexCache()");
+            //UnityEngine.Profiling.Profiler.BeginSample("Copy the vertex data in SetupVertexCache()");
             Mesh m = render.sharedMesh;
             BoneWeight[] boneWeights = m.boneWeights;
             Debug.Assert(boneWeights.Length > 0);
@@ -834,7 +834,7 @@ namespace AnimationInstancing
                     vertexCache.weight[j].w = -0.1f;
                 }
             }
-            UnityEngine.Profiling.Profiler.EndSample();
+            //UnityEngine.Profiling.Profiler.EndSample();
 
             if (vertexCache.materials == null)
                 vertexCache.materials = render.sharedMaterials;

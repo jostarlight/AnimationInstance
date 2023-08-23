@@ -9,7 +9,7 @@ namespace AnimationInstancing
         // Merge all bones to a single array and merge all bind pose
         public static Transform[] MergeBone(SkinnedMeshRenderer[] meshRender, List<Matrix4x4> bindPose)
         {
-            UnityEngine.Profiling.Profiler.BeginSample("MergeBone()");
+            //UnityEngine.Profiling.Profiler.BeginSample("MergeBone()");
             List<Transform> listTransform = new List<Transform>(150);
             for (int i = 0; i != meshRender.Length; ++i)
             {
@@ -37,7 +37,7 @@ namespace AnimationInstancing
                 }
                 meshRender[i].enabled = false;
             }
-            UnityEngine.Profiling.Profiler.EndSample();
+            //UnityEngine.Profiling.Profiler.EndSample();
             return listTransform.ToArray();
         }
 

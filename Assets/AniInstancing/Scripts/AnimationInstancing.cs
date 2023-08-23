@@ -110,7 +110,7 @@ namespace AnimationInstancing
                     break;
             }
 
-            UnityEngine.Profiling.Profiler.BeginSample("Calculate lod");
+            //UnityEngine.Profiling.Profiler.BeginSample("Calculate lod");
             LODGroup lod = GetComponent<LODGroup>();
             if (lod != null)
             {
@@ -168,7 +168,7 @@ namespace AnimationInstancing
                     info.skinnedMeshRenderer[j].enabled = false;
                 }
             }
-            UnityEngine.Profiling.Profiler.EndSample();
+            //UnityEngine.Profiling.Profiler.EndSample();
 
             if (AnimationInstancingMgr.Instance.UseInstancing
                 && animator != null)
@@ -314,7 +314,7 @@ namespace AnimationInstancing
 /*
         private void CalcBoundingSphere()
         {
-            UnityEngine.Profiling.Profiler.BeginSample("CalcBoundingSphere()");
+            //UnityEngine.Profiling.Profiler.BeginSample("CalcBoundingSphere()");
             Bounds bound = new Bounds(new Vector3(0, 0, 0), new Vector3(1, 1, 1));
             LodInfo info = lodInfo[0];
             for (int i = 0; i != info.meshRenderer.Length; ++i)
@@ -330,7 +330,7 @@ namespace AnimationInstancing
             float radius = bound.size.x > bound.size.y ? bound.size.x : bound.size.y;
             radius = radius > bound.size.z ? radius : bound.size.z;
             boundingSpere.radius = radius;
-            UnityEngine.Profiling.Profiler.EndSample();
+            //UnityEngine.Profiling.Profiler.EndSample();
         }
 */
 

@@ -899,7 +899,7 @@ namespace AnimationInstancing
             Matrix4x4 rootMatrix1stFrame,
             bool rootMotion)
         {
-            UnityEngine.Profiling.Profiler.BeginSample("AddBoneMatrix()");
+            //UnityEngine.Profiling.Profiler.BeginSample("AddBoneMatrix()");
             AnimationInstancingMgr.VertexCache vertexCache = null;
             bool find = generateVertexCachePool.TryGetValue(nameCode, out vertexCache);
             if (!find)
@@ -913,7 +913,7 @@ namespace AnimationInstancing
             matrixData.frameIndex = -1;
             matrixData.boneListIndex = -1;
 
-            UnityEngine.Profiling.Profiler.BeginSample("AddBoneMatrix:update the matrix");
+            //UnityEngine.Profiling.Profiler.BeginSample("AddBoneMatrix:update the matrix");
             if (generateMatrixDataPool.ContainsKey(stateName))
             {
                 ArrayList list = generateMatrixDataPool[stateName];
@@ -929,7 +929,7 @@ namespace AnimationInstancing
             }
             else
             {
-                UnityEngine.Profiling.Profiler.BeginSample("AddBoneMatrix:ContainsKey");
+                //UnityEngine.Profiling.Profiler.BeginSample("AddBoneMatrix:ContainsKey");
                 matrixData.boneMatrix = UtilityHelper.CalculateSkinMatrix(
                     vertexCache.bonePose,
                     vertexCache.bindPose,
@@ -942,11 +942,11 @@ namespace AnimationInstancing
                 list.Add(data);
                 generateMatrixDataPool[stateName] = list;
 
-                UnityEngine.Profiling.Profiler.EndSample();
+                //UnityEngine.Profiling.Profiler.EndSample();
             }
-            UnityEngine.Profiling.Profiler.EndSample();
+            //UnityEngine.Profiling.Profiler.EndSample();
 
-            UnityEngine.Profiling.Profiler.EndSample();
+            //UnityEngine.Profiling.Profiler.EndSample();
         }
 
         private void AddMeshVertex2Generate(SkinnedMeshRenderer[] meshRender,
