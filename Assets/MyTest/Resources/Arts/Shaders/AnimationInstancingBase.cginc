@@ -70,8 +70,8 @@ half4 skinning(inout appdata_full v)
 	int nextFrame = curFrame + 1.0f;
 	half4x4 localToWorldMatrixPre = loadMatFromTexture(preFrame, bone.x) * w.x;
 	localToWorldMatrixPre += loadMatFromTexture(preFrame, bone.y) * max(0, w.y);
-	localToWorldMatrixPre += loadMatFromTexture(preFrame, bone.z) * max(0, w.z);
-	localToWorldMatrixPre += loadMatFromTexture(preFrame, bone.w) * max(0, w.w);
+	//localToWorldMatrixPre += loadMatFromTexture(preFrame, bone.z) * max(0, w.z);
+	//localToWorldMatrixPre += loadMatFromTexture(preFrame, bone.w) * max(0, w.w);
 
 	// half4x4 localToWorldMatrixNext = loadMatFromTexture(nextFrame, bone.x) * w.x;
 	// localToWorldMatrixNext += loadMatFromTexture(nextFrame, bone.y) * max(0, w.y);
