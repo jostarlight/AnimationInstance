@@ -66,27 +66,27 @@ namespace AnimationInstancing
                 return info;
             }
 
-#if UNITY_IPHONE || UNITY_ANDROID
-            Debug.Assert(m_useBundle);
-            if (m_mainBundle == null)
-                Debug.LogError("You should call LoadAnimationAssetBundle first.");
-#endif
-            if (m_useBundle)
-            {
-                CreateAnimationRequest request = new CreateAnimationRequest();
-                request.prefab = prefab;
-                request.instance = instance;
-                if (m_mainBundle != null)
-                {
-                    StartCoroutine(LoadAnimationInfoFromAssetBundle(request));
-                }
-                else
-                {
-                    m_requestList.Add(request);
-                }
-                return null;
-            }
-            else
+// #if UNITY_IPHONE || UNITY_ANDROID
+//             Debug.Assert(m_useBundle);
+//             if (m_mainBundle == null)
+//                 Debug.LogError("You should call LoadAnimationAssetBundle first.");
+// #endif
+//             if (m_useBundle)
+//             {
+//                 CreateAnimationRequest request = new CreateAnimationRequest();
+//                 request.prefab = prefab;
+//                 request.instance = instance;
+//                 if (m_mainBundle != null)
+//                 {
+//                     StartCoroutine(LoadAnimationInfoFromAssetBundle(request));
+//                 }
+//                 else
+//                 {
+//                     m_requestList.Add(request);
+//                 }
+//                 return null;
+//             }
+//             else
                 return CreateAnimationInfoFromFile(prefab);
         }
 
@@ -148,7 +148,7 @@ namespace AnimationInstancing
 		    path = Application.dataPath + "/Resources/Data/StreamingAssets/AnimationTexture/";
 #endif
 
-#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
+#if UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
             var text = Resources.Load<TextAsset>("AnimationTexture/" + prefab.name);
             BinaryReader reader = new BinaryReader(new MemoryStream(text.bytes));
             InstanceAnimationInfo info = new InstanceAnimationInfo();
@@ -190,8 +190,12 @@ namespace AnimationInstancing
 //             BinaryReader reader = new BinaryReader(new MemoryStream(w.bytes));
 //             List<AnimationInfo> listInfo = ReadAnimationInfo(reader);
 //             m_animationInfo.Add(prefab, listInfo);
-            var text = Resources.Load<TextAsset>("AnimationTexture/" + prefab.name);
-            BinaryReader reader = new BinaryReader(new MemoryStream(text.bytes));	
+            string abName = Application.streamingAssetsPath + "/" + "AssetBundle/animationtexture.ab";
+            var ab = AssetBundle.LoadFromFile(abName);
+            string assetName = "Assets/MyTest/Resources/AnimationTexture/" + prefab.name + ".bytes";
+            TextAsset _asset = ab.LoadAsset<TextAsset>(assetName);
+
+            BinaryReader reader = new BinaryReader(new MemoryStream(_asset.bytes));	
             InstanceAnimationInfo info = new InstanceAnimationInfo();
             info.listAniInfo = ReadAnimationInfo(reader);
             info.extraBoneInfo = ReadExtraBoneInfo(reader);

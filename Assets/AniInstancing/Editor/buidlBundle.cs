@@ -12,9 +12,10 @@ public class buidlBundle : MonoBehaviour
     static void CreateAssetBundle()
     {
         CheckDirectory(Path);
-        BuildPipeline.BuildAssetBundles(Path, BuildAssetBundleOptions.ChunkBasedCompression, EditorUserBuildSettings.activeBuildTarget);
+        BuildPipeline.BuildAssetBundles(Path, BuildAssetBundleOptions.ChunkBasedCompression, BuildTarget.Android);
         FileUtil.DeleteFileOrDirectory("Assets/StreamingAssets/" + FolderName);
         FileUtil.CopyFileOrDirectory(Path, "Assets/StreamingAssets/" + FolderName);
+        AssetDatabase.Refresh();
     }
 
     static void CheckDirectory(string path)

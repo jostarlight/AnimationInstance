@@ -63,7 +63,7 @@ Shader "changeColorForAI" {
                 return lerp(a,dot(a, float3(0.3,0.59,0.11)),1.0 -saturate);
             }
 
-            v2f vertt (appdata_full v, uint vid : SV_VertexID)
+            v2f vertt (appdata_full v)
             {
                 UNITY_SETUP_INSTANCE_ID(v);
                 v2f o;
